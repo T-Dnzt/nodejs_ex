@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+    <head>
+        <title>How to cook !</title>
+        <link rel="stylesheet" href="">
+    </head>
+
+    <body>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+          <script src="./socket.io/socket.io.js"></script>
+          <script>
+
+            $(document).ready(function() {
+                var socket = io.connect(document.URL);
+
+                var call = function(id, emitId, toEnable) {
+                    $(id).click(function(ev) {
+                        socket.emit(emitId, function() {
+                           $(id).attr("disabled", "disabled"); 
+                           $(toEnable).removeAttr("disabled"); 
+                        });
+                    });
+                };
+
+                call("#fillWater", "fillWater", "#addSalt")
+                call("#addSalt", "addSalt", "#boilWater")
+                call("#boilWater", "boilWater", "#tomatoes")
+                call("#tomatoes", "tomatoes", "#prepareSoffrito")
+                call("#prepareSoffrito", "prepareSoffrito", "#warmSoffrito")
+                call("#warmSoffrito", "warmSoffrito", "#addPasta")
+                call("#addPasta", "addPasta", "#addIngredients")
+
+                $("#addIngredients").click(function(ev) {
+                        socket.emit("addIngredients", function() {
+                           $("#addIngredients").attr("disabled", "disabled"); 
+                           $("#cookPastaAldente").removeAttr("disabled"); 
+                           $("#cookPastaWellCook").removeAttr("disabled"); 
+                        });
+                });
+
+                call("#cookPastaAldente", "cookPastaAldente", "#tastePasta")
+                call("#cookPastaWellCook", "cookPastaWellCook", "#tastePasta")
+                call("#tastePasta", "tastePasta", "#emptyWater")
+                call("#emptyWater", "emptyWater", "#cheese")
+
+                 $("#cheese").click(function(ev) {
+                        socket.emit("addIngredients", function() {
+                           alert("FINISH !");
+                        });
+                });
+
+
+            });
+            </script>
+        <button type="button" id="fillWater" href="">Remplir la casserole</button>
+        <button type="button" id="addSalt" href="" disabled="disabled">Ajouter l'eau</button>
+        <button type="button" id="boilWater" href="" disabled="disabled">Bouillir l'eau</button>
+        <button type="button" id="tomatoes" href="" disabled="disabled">Couper tomatoes</button>
+        <button type="button" id="prepareSoffrito" href="" disabled="disabled">Préparer Soffrito</button>
+        <button type="button" id="warmSoffrito" href="" disabled="disabled">Chauffer Soffrito</button>
+        <button type="button" id="addPasta" href="" disabled="disabled">Ajouter les pâtes</button>
+        <button type="button" id="addIngredients" href="" disabled="disabled">Ajouter les ingrédients</button>
+        <button type="button" id="cookPastaAldente" href="" disabled="disabled">Cuisiner les pâtes aldente</button>
+        <button type="button" id="cookPastaWellCook" href="" disabled="disabled">Cuisiner les pâtes bien cuite</button>
+        <button type="button" id="tastePasta" href="" disabled="disabled">Essaye les pâtes</button>
+        <button type="button" id="emptyWater" href="" disabled="disabled">Vider l'eau</button>
+        <button type="button" id="cheese" href="" disabled="disabled">Servir avec du fromage</button>
+
+
+    </body>
+</html>
