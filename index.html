@@ -3,6 +3,7 @@
     <head>
         <title>How to cook !</title>
         <link rel="stylesheet" href="">
+        <meta charset="UTF-8">
     </head>
 
     <body>
@@ -17,8 +18,8 @@
                 var call = function(id, emitId, toEnable) {
                     $(id).click(function(ev) {
                         socket.emit(emitId, function() {
-                           $(id).attr("disabled", "disabled"); 
-                           $(toEnable).removeAttr("disabled"); 
+                           $(id).attr("disabled", "disabled");
+                           $(toEnable).removeAttr("disabled");
                         });
                     });
                 };
@@ -33,9 +34,9 @@
 
                 $("#addIngredients").click(function(ev) {
                         socket.emit("addIngredients", function() {
-                           $("#addIngredients").attr("disabled", "disabled"); 
-                           $("#cookPastaAldente").removeAttr("disabled"); 
-                           $("#cookPastaWellCook").removeAttr("disabled"); 
+                           $("#addIngredients").attr("disabled", "disabled");
+                           $("#cookPastaAldente").removeAttr("disabled");
+                           $("#cookPastaWellCook").removeAttr("disabled");
                         });
                 });
 
