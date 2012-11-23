@@ -24,7 +24,8 @@ io.sockets.on("connection", function(socket) {
   };
 
   var randomize = function(min, max) {
-    
+    var rand = Math.floor((Math.random()*max)+min);
+    return rand * 1000;
   }
 
 
