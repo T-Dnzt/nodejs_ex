@@ -19,26 +19,26 @@ io.sockets.on("connection", function(socket) {
 
   var socketOn = function(onId, timer) {
      socket.on(onId, function(callback) {
-       setTimeout(callback, timer);      
+       setTimeout(callback, timer);
     });
   };
 
   var randomize = function(min, max) {
-    var rand = Math.floor((Math.random()*max)+min);
+    var rand = Math.floor((Math.random()*max)+min-1);
     return rand * 1000;
   }
 
 
   socketOn("fillWater", 100);
   socketOn("addSalt", 100);
-  socketOn("boilWater", 9000);
+  socketOn("boilWater", randomize(9,10));
   socketOn("tomatoes", 1000);
   socketOn("prepareSoffrito", 1500);
   socketOn("warmSoffrito", 5000);
   socketOn("addPasta", 100);
   socketOn("addIngredients", 200);
-  socketOn("cookPastaAldente", 6000);
-  socketOn("cookPastaWellCook", 7000);
+  socketOn("cookPastaAldente", randomize(5,7));
+  socketOn("cookPastaWellCook", randomize(6,8));
   socketOn("tastePasta", 100);
   socketOn("emptyWater", 100);
   socketOn("cheese", 200);
